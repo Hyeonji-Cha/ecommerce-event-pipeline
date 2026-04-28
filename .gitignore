@@ -1,16 +1,29 @@
+# Python
 venv/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
+# Data artifacts
 data/
 *.parquet
+exports/
 
+# Secrets / logs
 .env
 .env.*
 secrets.*
 *.log
 
+# IDE / OS
 .vscode/
 .idea/
 .DS_Store
+
+# Optional local artifacts
+*.tmp
+*.bak
+
+# Tableau 
+# *.twb
+# *.twbx

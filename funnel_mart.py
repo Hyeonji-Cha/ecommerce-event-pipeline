@@ -1,8 +1,12 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, countDistinct, lit, round as spark_round
+import os
 
-SILVER_PATH = "data/silver/clean_events"
-GOLD_PATH = "data/gold/mart_funnel_stats"
+RUN_ID = os.environ["RUN_ID"]
+BASE_PATH = f"data/runs/{RUN_ID}"
+
+SILVER_PATH = f"{BASE_PATH}/silver/clean_events"
+GOLD_PATH = f"{BASE_PATH}/gold/mart_funnel_stats"
 
 spark = (
     SparkSession.builder

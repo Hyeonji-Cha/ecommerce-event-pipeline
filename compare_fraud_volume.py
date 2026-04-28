@@ -1,7 +1,11 @@
+import os
 import duckdb
 
-SILVER_PATH = "data/silver/clean_events/*/*.parquet"
-FRAUD_PATH = "data/gold/mart_fraud_alerts/*/*.parquet"
+RUN_ID = os.environ["RUN_ID"]
+BASE_PATH = f"data/runs/{RUN_ID}"
+
+SILVER_PATH = f"{BASE_PATH}/silver/clean_events/*/*.parquet"
+FRAUD_PATH = f"{BASE_PATH}/gold/mart_fraud_alerts/*/*.parquet"
 
 con = duckdb.connect()
 

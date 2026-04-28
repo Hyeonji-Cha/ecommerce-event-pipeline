@@ -1,11 +1,15 @@
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
+
+RUN_ID = os.environ["RUN_ID"]
+BASE_PATH = f"data/runs/{RUN_ID}"
 
 KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
 KAFKA_TOPIC = "raw-events"
 
-BRONZE_OUTPUT_PATH = "data/bronze/raw_events"
-BRONZE_CHECKPOINT_PATH = "data/checkpoints/bronze_raw_events"
+BRONZE_PATH = f"{BASE_PATH}/bronze/raw_events"
+BRONZE_CHECKPOINT_PATH = f"{BASE_PATH}/checkpoints/bronze_raw_events"
 
 spark = (
     SparkSession.builder
@@ -41,7 +45,7 @@ query = (
     bronze_df.writeStream
     .format("parquet")
     .outputMode("append")
-    .option("path", BRONZE_OUTPUT_PATH)
+    .option("path", BRONZE_PATH)
     .option("checkpointLocation", BRONZE_CHECKPOINT_PATH)
     .start()
 )

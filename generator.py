@@ -10,7 +10,7 @@ from kafka import KafkaProducer
 # 1. 기본 설정
 # ─────────────────────────────
 
-USER_IDS = [f"user_{i}" for i in range(1, 101)]
+USER_IDS = [f"user_{i}" for i in range(1, 301)] #100 > 300으로 늘림_재구매 빈도 줄이기 위헤서
 PRODUCT_IDS = [f"prod_{i}" for i in range(1, 51)]
 EVENT_TYPES = ["view", "search", "add_to_cart", "purchase"]
 EVENT_WEIGHTS = [0.5, 0.25, 0.15, 0.1]
@@ -80,7 +80,7 @@ def generate_event():
 
     country = get_base_country(user_id)
 
-    if event_type == "purchase" and random.random() < 0.02:
+    if event_type == "purchase" and random.random() < 0.04:
         country = random.choice([c for c in COUNTRIES if c != country])
 
     event = {

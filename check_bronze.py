@@ -1,7 +1,10 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
+import os
 
-BRONZE_PATH = "data/bronze/raw_events"   
+RUN_ID = os.environ["RUN_ID"]
+BASE_PATH = f"data/runs/{RUN_ID}"
+
 
 spark = (
     SparkSession.builder
@@ -10,7 +13,7 @@ spark = (
     .getOrCreate()
 )
 
-df = spark.read.parquet(BRONZE_PATH)
+df = spark.read.parquet(f"{BASE_PATH}/bronze/raw_events")
 
 df.orderBy(col("kafka_timestamp").desc(), col("offset").desc()).show(20, truncate=False)
 df.printSchema()

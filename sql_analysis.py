@@ -1,7 +1,11 @@
+import os
 import duckdb
 
-FUNNEL_PATH = "data/gold/mart_funnel_stats/*/*.parquet"
-FRAUD_PATH = "data/gold/mart_fraud_alerts/*/*.parquet"
+RUN_ID = os.environ["RUN_ID"]
+BASE_PATH = f"data/runs/{RUN_ID}"
+
+FUNNEL_PATH = f"{BASE_PATH}/gold/mart_funnel_stats/*/*.parquet"
+FRAUD_PATH = f"{BASE_PATH}/gold/mart_fraud_alerts/*/*.parquet"
 
 
 def print_result(title, result):

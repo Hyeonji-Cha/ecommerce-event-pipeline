@@ -12,9 +12,13 @@ from pyspark.sql.types import (
     StringType,
     DoubleType
 )
+import os
 
-BRONZE_PATH = "data/bronze/raw_events"
-SILVER_PATH = "data/silver/clean_events"
+RUN_ID = os.environ["RUN_ID"]
+BASE_PATH = f"data/runs/{RUN_ID}"
+
+BRONZE_PATH = f"{BASE_PATH}/bronze/raw_events"
+SILVER_PATH = f"{BASE_PATH}/silver/clean_events"
 
 EVENT_SCHEMA = StructType([
     StructField("event_id", StringType(), True),

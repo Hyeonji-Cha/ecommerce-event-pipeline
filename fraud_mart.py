@@ -11,8 +11,13 @@ from pyspark.sql.functions import (
     current_timestamp,
 )
 
-SILVER_PATH = "data/silver/clean_events"
-GOLD_PATH = "data/gold/mart_fraud_alerts"
+import os
+
+RUN_ID = os.environ["RUN_ID"]
+BASE_PATH = f"data/runs/{RUN_ID}"
+
+SILVER_PATH = f"{BASE_PATH}/silver/clean_events"
+GOLD_PATH = f"{BASE_PATH}/gold/mart_fraud_alerts"
 
 SHORT_TIME_SEC = 300          # 10분
 HIGH_AMOUNT_THRESHOLD = 480.0
